@@ -36,3 +36,6 @@ TODO:
 * Make things less laggy, maybe (I'm not sure if this is still an issue,
   or if the lag is thanks to writing and testing it in a VM on an
   ancient laptop with no RAM)
+
+* Fix bug where snake ignores player input and just crashes into a wall
+  after a bit.
