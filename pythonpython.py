@@ -92,6 +92,11 @@ def check_for_quit():
         pygame.event.post(event)
 
 def change_direction(direction):
+    for event in pygame.event.get():
+        if event.type == KEYUP: # this is here so that KEYDOWN events are handled. otherwise,
+                                # they will eventually render the snake unresponsive, and
+                                # it will crash into a wall as the gamer looks on in anguish.
+            pygame.event.post(event)
     for event in pygame.event.get(KEYUP):
         if event.key == K_LEFT and direction is not RIGHT: #now snake can't go back on itself
             direction = LEFT
