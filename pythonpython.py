@@ -46,6 +46,7 @@ UP = 'up'
 DOWN = 'down'
 LEFT = 'left'
 RIGHT = 'right'
+new_direction = ''
 
 
 def main():
@@ -62,20 +63,21 @@ def main():
    food.append(food_start_pos)
    snake.append(snake_start_pos)
    direction = random.choice((UP, DOWN, LEFT, RIGHT))
+   new_direction = direction
    snake_crashed = False
 
    while True == True: #main game loop
        DISPLAYSURF.fill(BLACK)
        draw_food(food)
        check_for_quit()
-       new_direction = change_direction(direction)
+       new_direction = change_direction(new_direction)
        snake = refresh_snake(snake, new_direction)
        snake_crashed = detect_crash(snake)
        if snake_crashed == True:
            quit()
        snake_eating(snake, food, new_direction)
        pygame.display.update()
-       FPSCLOCK.tick(10)
+       FPSCLOCK.tick(12)
 
 def quit():
     pygame.quit()
@@ -99,7 +101,6 @@ def change_direction(direction):
             direction = UP
         elif event.key == K_DOWN and direction is not UP:
             direction = DOWN
-        pygame.event.post(event)
     return direction
 
 def add_snake_head(old_snake_head, move_dir):
