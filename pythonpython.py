@@ -18,8 +18,8 @@ import sys, random, pygame
 from pygame.locals import *
 from colours import *
 
-WINDOWWIDTH = 640
-WINDOWHEIGHT = 480
+WINDOWWIDTH = 300
+WINDOWHEIGHT = 300
 
 CELLSIZE = 10
 
@@ -52,7 +52,8 @@ new_direction = ''
 def main():
 
    snake = []
-   snake_start_pos = random.choice(grid)
+   center_of_screen = (COLUMNS/2, ROWS/2)
+   snake_start_pos = center_of_screen
  
    food = []
    food_start_pos = random.choice(grid)
