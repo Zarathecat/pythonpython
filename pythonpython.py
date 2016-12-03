@@ -51,6 +51,8 @@ new_direction = ''
 
 def main():
 
+   score = 0
+
    snake = []
    center_of_screen = (COLUMNS/2, ROWS/2)
    snake_start_pos = center_of_screen
@@ -60,15 +62,35 @@ def main():
 
    FPSCLOCK = pygame.time.Clock()
    pygame.display.set_caption('python-python!')
-   BASICFONT = pygame.font.Font('freesansbold.ttf', 16)
+   try:
+       BASICFONT = pygame.font.Font('/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansCondensed.ttf', 16)
+   except:
+       BASICFONT = pygame.font.Font('freesansbold.ttf', 16)
+
+   try:
+       SHADOWFONT = pygame.font.Font('/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansCondensed.ttf', 16) #3Dish
+   except:
+       SHADOWFONT = pygame.font.Font('freesansbold.ttf', 16)
+
+
    food.append(food_start_pos)
    snake.append(snake_start_pos)
    direction = random.choice((UP, DOWN, LEFT, RIGHT))
    new_direction = direction
    snake_crashed = False
+   counter = 0
 
    while True == True: #main game loop
+       score = (len(snake) - 1) * 100 # '-1' since it starts at 1
+       score_surf = BASICFONT.render('Score: %d' % score, 1, BRIGHTRED)
+       shadow_surf = SHADOWFONT.render('Score: %d' % score, 1, ORANGE)
+       score_rect = score_surf.get_rect()
+       score_rect.topleft = (10, 10)
+       shadow_rect = shadow_surf.get_rect()
+       shadow_rect.topleft = (11, 9)
        DISPLAYSURF.fill(BLACK)
+       DISPLAYSURF.blit(shadow_surf, shadow_rect)
+       DISPLAYSURF.blit(score_surf, score_rect)
        draw_food(food)
        check_for_quit()
        new_direction = change_direction(new_direction)
@@ -183,10 +205,15 @@ def snake_lengthen(snake, direction):
 
 def draw_snake(snake):
     for i in snake:
-        pygame.draw.rect(DISPLAYSURF, YELLOW, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE, CELLSIZE))
+        pygame.draw.ellipse(DISPLAYSURF, YELLOW, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE+1, CELLSIZE+1))
+        pygame.draw.ellipse(DISPLAYSURF, BRIGHTYELLOW, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE-1, CELLSIZE-1))
+
+
 
 def draw_food(food):
     for i in food:
-        pygame.draw.rect(DISPLAYSURF, GREEN, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE, CELLSIZE))
+        pygame.draw.rect(DISPLAYSURF, GREEN, ((i[0] *CELLSIZE), (i[1] * CELLSIZE), CELLSIZE+1, CELLSIZE+1))
+        pygame.draw.rect(DISPLAYSURF, BRIGHTGREEN, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE-1, CELLSIZE-1))
+
 
 main()
