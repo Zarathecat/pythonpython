@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+![Screenshot](sssssnake.jpeg)
+
 Here is a game of snake, written in python. It's another of the
 'write it to see if you can' things. This took a few hours, mainly because
 my brain just could not deal with the snake's head being the *last* thing
