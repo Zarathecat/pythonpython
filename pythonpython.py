@@ -80,6 +80,10 @@ def main():
    new_direction = direction
    snake_crashed = False
    counter = 0
+   
+   if MUSIC != "":
+       pygame.mixer.music.load(MUSIC)
+       pygame.mixer.music.play(-1, 0.0)
 
    while True == True: #main game loop
        score = (len(snake) - 1) * 100 # '-1' since it starts at 1

@@ -12,6 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Window width in pixels
 WIDTH = 300
+
+# Window height in pixels
 HEIGHT = 300
+
+# Framerate; a higher value will result in a faster game
 FPS = 12
+
+# Background music, put music in game's music directory and change
+# the empty string to something like 'music/example.mp3'
+
+MUSIC = ''
