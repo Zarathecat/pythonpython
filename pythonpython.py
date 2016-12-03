@@ -207,6 +207,7 @@ def draw_snake(snake):
     for i in snake:
         pygame.draw.ellipse(DISPLAYSURF, YELLOW, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE+1, CELLSIZE+1))
         pygame.draw.ellipse(DISPLAYSURF, BRIGHTYELLOW, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE-1, CELLSIZE-1))
+        pygame.draw.ellipse(DISPLAYSURF, PALEYELLOW, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE-4, CELLSIZE-4))
 
 
 
@@ -214,6 +215,8 @@ def draw_food(food):
     for i in food:
         pygame.draw.rect(DISPLAYSURF, GREEN, ((i[0] *CELLSIZE), (i[1] * CELLSIZE), CELLSIZE+1, CELLSIZE+1))
         pygame.draw.rect(DISPLAYSURF, BRIGHTGREEN, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE-1, CELLSIZE-1))
+        pygame.draw.rect(DISPLAYSURF, PALEGREEN, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE-4, CELLSIZE-4))
+
 
 
 main()
