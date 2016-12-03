@@ -1,0 +1,3 @@
+WIDTH = 300
+HEIGHT = 300
+FPS = 17

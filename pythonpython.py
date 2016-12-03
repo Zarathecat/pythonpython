@@ -17,9 +17,10 @@
 import sys, random, pygame
 from pygame.locals import *
 from colours import *
+from snakeconf import *
 
-WINDOWWIDTH = 300
-WINDOWHEIGHT = 300
+WINDOWWIDTH = WIDTH
+WINDOWHEIGHT = HEIGHT
 
 CELLSIZE = 10
 
@@ -100,7 +101,7 @@ def main():
            quit()
        snake_eating(snake, food, new_direction)
        pygame.display.update()
-       FPSCLOCK.tick(12)
+       FPSCLOCK.tick(FPS)
 
 def quit():
     pygame.quit()
@@ -213,9 +214,9 @@ def draw_snake(snake):
 
 def draw_food(food):
     for i in food:
-        pygame.draw.rect(DISPLAYSURF, GREEN, ((i[0] *CELLSIZE), (i[1] * CELLSIZE), CELLSIZE+1, CELLSIZE+1))
-        pygame.draw.rect(DISPLAYSURF, BRIGHTGREEN, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE-1, CELLSIZE-1))
-        pygame.draw.rect(DISPLAYSURF, PALEGREEN, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE-4, CELLSIZE-4))
+        pygame.draw.ellipse(DISPLAYSURF, GREEN, ((i[0] *CELLSIZE), (i[1] * CELLSIZE), CELLSIZE+2, CELLSIZE+2))
+        pygame.draw.ellipse(DISPLAYSURF, BRIGHTGREEN, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE, CELLSIZE))
+        pygame.draw.ellipse(DISPLAYSURF, PALEGREEN, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE-4, CELLSIZE-4))
 
 
 
