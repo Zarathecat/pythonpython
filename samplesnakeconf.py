@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# If you would like to save your own config, make a copy of this file
+# called 'snakeconf.py', and change that.
+
 # Window width in pixels
 WIDTH = 300
 

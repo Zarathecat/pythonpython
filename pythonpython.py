@@ -17,7 +17,10 @@
 import sys, random, pygame
 from pygame.locals import *
 from colours import *
-from snakeconf import *
+try:
+    from snakeconf import *
+except:
+    from samplesnakeconf import *
 
 WINDOWWIDTH = WIDTH
 WINDOWHEIGHT = HEIGHT
