@@ -173,7 +173,7 @@ def check_duplicates(snake):
 
 def check_for_wall(snake):
     for i in snake:
-        if i[0] >= COLUMNS or i[0] <= 0 or i[1] >= ROWS or i[1] <= 0:
+        if i[0] >= COLUMNS or i[0] < 0 or i[1] >= ROWS or i[1] < 0:
             wall_in_snake = True
             return wall_in_snake
     wall_in_snake = False
