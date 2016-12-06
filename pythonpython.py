@@ -77,7 +77,6 @@ def main():
    food.append(food_start_pos)
    snake.append(snake_start_pos)
    direction = random.choice((UP, DOWN, LEFT, RIGHT))
-   new_direction = direction
    snake_crashed = False
    counter = 0
    
@@ -98,12 +97,12 @@ def main():
        DISPLAYSURF.blit(score_surf, score_rect)
        draw_food(food)
        check_for_quit()
-       new_direction = change_direction(new_direction)
-       snake = refresh_snake(snake, new_direction)
+       direction = change_direction(direction)
+       snake = refresh_snake(snake, direction)
        snake_crashed = detect_crash(snake)
        if snake_crashed == True:
            quit()
-       snake_eating(snake, food, new_direction)
+       snake_eating(snake, food, direction)
        pygame.display.update()
        FPSCLOCK.tick(FPS)
 
