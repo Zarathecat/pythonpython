@@ -88,6 +88,7 @@ def main():
        pygame.mixer.music.play(-1, 0.0)
 
    while True == True: #main game loop
+       snake_lengthen = False
        score = (len(snake) - 1) * 100 # '-1' since it starts at 1
        score_surf = BASICFONT.render('Score: %d' % score, 1, BRIGHTRED)
        shadow_surf = SHADOWFONT.render('Score: %d' % score, 1, ORANGE)
@@ -101,7 +102,7 @@ def main():
        draw_food(food)
        check_for_quit()
        direction = change_direction(direction)
-       snake = refresh_snake(snake, direction)
+       snake = refresh_snake(snake, direction, snake_lengthen)
        snake_crashed = detect_crash(snake)
        if snake_crashed == True:
            quit()
@@ -149,23 +150,13 @@ def add_snake_head(old_snake_head, move_dir):
         new_snake_head = (old_snake_head[0]+MOVESPEED, old_snake_head[1])
     return new_snake_head
 
-def add_snake_tail(old_snake_head, move_dir):
-    if move_dir == UP:
-        new_snake_tail = (old_snake_head[0], old_snake_head[1]-MOVESPEED-1)
-    elif move_dir == DOWN:
-        new_snake_tail = (old_snake_head[0], old_snake_head[1]+MOVESPEED+1)
-    elif move_dir == LEFT:
-        new_snake_tail = (old_snake_head[0]-MOVESPEED-1, old_snake_head[1])
-    elif move_dir == RIGHT:
-        new_snake_tail = (old_snake_head[0]+MOVESPEED+1, old_snake_head[1])
-    return new_snake_tail
-
-
-
-def refresh_snake(snake, direction):
+def refresh_snake(snake, direction, snake_lengthen):
     new_snake_head = add_snake_head(snake[-1], direction)
     snake.append(new_snake_head)
-    snake.remove(snake[0])
+    if snake_lengthen == False:
+        snake.remove(snake[0])
+    else:
+        snake_lengthen = False
     draw_snake(snake)
     return snake
 
@@ -201,13 +192,9 @@ def snake_eating(snake, food, direction):
    for i in food:
        if i in snake:
            food.remove(food[0])
-           snake_lengthen(snake, direction)
+           snake_lengthen = True
+           refresh_snake(snake, direction, snake_lengthen)
            food.append(random.choice(grid))
-
-def snake_lengthen(snake, direction):
-    new_snake_tail = add_snake_tail(snake[0], direction)
-    snake.insert(0,new_snake_tail)
-    draw_snake(snake)
 
 
 def draw_snake(snake):
@@ -215,7 +202,6 @@ def draw_snake(snake):
         pygame.draw.ellipse(DISPLAYSURF, YELLOW, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE+1, CELLSIZE+1))
         pygame.draw.ellipse(DISPLAYSURF, BRIGHTYELLOW, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE-1, CELLSIZE-1))
         pygame.draw.ellipse(DISPLAYSURF, PALEYELLOW, (i[0] *CELLSIZE, i[1] * CELLSIZE, CELLSIZE-4, CELLSIZE-4))
-
 
 
 def draw_food(food):
