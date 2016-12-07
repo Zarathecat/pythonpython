@@ -28,3 +28,7 @@ FPS = 12
 # the empty string to something like 'music/example.mp3'
 
 MUSIC = ''
+
+# Save file. Game will read high score from here.
+
+SAVEFILE = 'save.txt'

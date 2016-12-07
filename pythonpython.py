@@ -22,6 +22,14 @@ try:
 except:
     from samplesnakeconf import *
 
+savefile = open(SAVEFILE, 'r')
+
+high_score = 0
+
+high_score = savefile.read()
+high_score = int(high_score)
+
+
 WINDOWWIDTH = WIDTH
 WINDOWHEIGHT = HEIGHT
 
@@ -96,30 +104,46 @@ def main():
        score_rect.topleft = (10, 10)
        shadow_rect = shadow_surf.get_rect()
        shadow_rect.topleft = (11, 9)
+
+       if score < high_score:
+           high_score_surf = BASICFONT.render('High score: %d' % high_score, 1, BLUE)
+       else: #duplicated, but so we're not reading from file a lot
+           high_score_surf = BASICFONT.render('High score: %d' % score, 1, BLUE)
+
+       high_score_rect = high_score_surf.get_rect()
+       high_score_rect.topleft = (150, 10)
+
        DISPLAYSURF.fill(BLACK)
        DISPLAYSURF.blit(shadow_surf, shadow_rect)
        DISPLAYSURF.blit(score_surf, score_rect)
+       DISPLAYSURF.blit(high_score_surf, high_score_rect)
+
        draw_food(food)
-       check_for_quit()
+       check_for_quit(score, high_score)
        direction = change_direction(direction)
        snake = refresh_snake(snake, direction, snake_lengthen)
        snake_crashed = detect_crash(snake)
        if snake_crashed == True:
-           quit()
+           draw_snake(snake)
+           quit(score, high_score)
        snake_eating(snake, food, direction)
        pygame.display.update()
        FPSCLOCK.tick(FPS)
 
-def quit():
+def quit(score, high_score):
+    if score > high_score:
+        score = str(score) #file.write() requires string
+        savefile = open(SAVEFILE, 'w')
+        savefile.write(score)
     pygame.quit()
     sys.exit()
 
-def check_for_quit():
+def check_for_quit(score, high_score):
     for event in pygame.event.get(QUIT):
-        quit()
+        quit(score, high_score)
     for event in pygame.event.get(KEYUP):
         if event.key == K_ESCAPE:
-            quit()
+            quit(score, high_score)
         pygame.event.post(event)
 
 def change_direction(direction):
