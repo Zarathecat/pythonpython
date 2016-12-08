@@ -27,6 +27,7 @@ savefile = open(SAVEFILE, 'r')
 high_score = 0
 
 high_score = savefile.read()
+savefile.close()
 high_score = int(high_score)
 
 
@@ -135,6 +136,7 @@ def quit(score, high_score):
         score = str(score) #file.write() requires string
         savefile = open(SAVEFILE, 'w')
         savefile.write(score)
+        savefile.close()
     pygame.quit()
     sys.exit()
 
